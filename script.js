@@ -1,11 +1,12 @@
 document.getElementById("startBtn").addEventListener("click", function () {
   document.getElementById("checkInSection").style.display = "block";
-  this.style.display = "none"; // hide the start button
+  this.style.display = "none"; // hide start button
 });
 
 document.getElementById("getSupportBtn").addEventListener("click", function () {
   const mood = document.getElementById("moodSelect").value;
   const messageDiv = document.getElementById("supportMessage");
+  const restartSection = document.getElementById("restartSection");
 
   let message = "";
 
@@ -30,4 +31,17 @@ document.getElementById("getSupportBtn").addEventListener("click", function () {
   }
 
   messageDiv.textContent = message;
+
+  if (mood) {
+    restartSection.style.display = "block";
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", function () {
+  // Reset all sections
+  document.getElementById("moodSelect").value = "";
+  document.getElementById("supportMessage").textContent = "";
+  document.getElementById("checkInSection").style.display = "none";
+  document.getElementById("restartSection").style.display = "none";
+  document.getElementById("startBtn").style.display = "inline-block";
 });
