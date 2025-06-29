@@ -1,33 +1,42 @@
-document.getElementById("startBtn").addEventListener("click", function () {
-  document.getElementById("checkInSection").style.display = "block";
-  this.style.display = "none"; // hide the start button
-});
+/* Reset base styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f4f6;
+  color: #333;
+  text-align: center;
+  padding: 2em;
+  margin: 0;
+}
 
-document.getElementById("getSupportBtn").addEventListener("click", function () {
-  const mood = document.getElementById("moodSelect").value;
-  const messageDiv = document.getElementById("supportMessage");
+/* Main heading */
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
 
-  let message = "";
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+}
 
-  switch (mood) {
-    case "overwhelmed":
-      message = "🫶 You're doing your best. Pause. Breathe. This moment will pass.";
-      break;
-    case "angry":
-      message = "💡 Step away if you need to. Silence isn’t failure—it’s space to cool down.";
-      break;
-    case "sad":
-      message = "💗 You don’t have to fix everything today. Just be present, even in small ways.";
-      break;
-    case "okay":
-      message = "🌱 Keep going. Even okay is a sign of growth.";
-      break;
-    case "hopeful":
-      message = "🌞 Hold onto that hope. You're building something beautiful.";
-      break;
-    default:
-      message = "Please choose how you're feeling.";
-  }
+/* Dropdown menu */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-  messageDiv.textContent = message;
-});
+/* Support message */
+#supportMessage {
+  font-size: 18px;
+  margin-top: 15px;
+  font-weight: 500;
+}
