@@ -28,40 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
     showSection(checkInScreen);
   });
 
-  // Get Support logic
-  document.getElementById("getSupportBtn").addEventListener("click", function () {
-    const mood = document.getElementById("moodSelect").value;
-    const messageDiv = document.getElementById("supportMessage");
+document.getElementById("getSupportBtn").addEventListener("click", function () {
+  const mood = document.getElementById("moodSelect").value;
+  const message = {
+    overwhelmed: "🫶 You're doing your best. Pause. Breathe. This moment will pass.",
+    angry: "💡 Step away if you need to. Silence isn’t failure—it’s space to cool down.",
+    sad: "💗 You don’t have to fix everything today. Just be present, even in small ways.",
+    okay: "🌱 Keep going. Even okay is a sign of growth.",
+    hopeful: "🌞 Hold onto that hope. You're building something beautiful.",
+  }[mood] || "Please choose how you're feeling.";
 
-    let message = "";
+  if (mood) {
+    document.getElementById("checkInScreen").style.display = "none";
+    document.getElementById("supportMenu").style.display = "block";
+    document.getElementById("supportMessage").textContent = message;
+  } else {
+    alert("Please choose how you're feeling.");
+  }
+});
 
-    switch (mood) {
-      case "overwhelmed":
-        message = "🫶 You're doing your best. Pause. Breathe. This moment will pass.";
-        break;
-      case "angry":
-        message = "💡 Step away if you need to. Silence isn’t failure—it’s space to cool down.";
-        break;
-      case "sad":
-        message = "💗 You don’t have to fix everything today. Just be present, even in small ways.";
-        break;
-      case "okay":
-        message = "🌱 Keep going. Even okay is a sign of growth.";
-        break;
-      case "hopeful":
-        message = "🌞 Hold onto that hope. You're building something beautiful.";
-        break;
-      default:
-        message = "Please choose how you're feeling.";
-    }
-
-    messageDiv.textContent = message;
-
-    if (mood) {
-      checkInScreen.style.display = "none";
-      supportMenu.style.display = "block";
-    }
-  });
 
   // Support menu navigation
   document.getElementById("toCalmBtn").addEventListener("click", () => showSection(calmToolkit));
