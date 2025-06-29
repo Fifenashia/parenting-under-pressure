@@ -7,43 +7,43 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
+<div id="app">
+  <div id="startScreen">
     <h1>Parenting Under Pressure</h1>
-    
-    <!-- Start Button -->
     <button id="startBtn">Start Check-In</button>
+  </div>
 
-    <!-- Affirmation Spinner -->
-<div id="affirmationSection" style="margin-top: 30px;">
-  <button id="getAffirmationBtn">Give Me an Affirmation</button>
-  <div id="affirmationText" style="margin-top: 15px; font-style: italic;"></div>
-</div>
+  <div id="checkInScreen" style="display: none;">
+    <h2>How are you feeling right now?</h2>
+    <select id="moodSelect">
+      <option value="">--Choose One--</option>
+      <option value="overwhelmed">😩 Overwhelmed</option>
+      <option value="angry">😡 Angry</option>
+      <option value="sad">😢 Sad</option>
+      <option value="okay">🙂 Okay</option>
+      <option value="hopeful">🌤️ Hopeful</option>
+    </select>
+    <button id="getSupportBtn">Get Support</button>
+  </div>
 
-    <!-- Check-In Section -->
-    <div id="checkInSection" style="display: none; margin-top: 20px;">
-      <p>How are you feeling right now?</p>
-      <select id="moodSelect">
-        <option value="">--Choose One--</option>
-        <option value="overwhelmed">😩 Overwhelmed</option>
-        <option value="angry">😡 Angry</option>
-        <option value="sad">😢 Sad</option>
-        <option value="okay">🙂 Okay</option>
-        <option value="hopeful">🌤️ Hopeful</option>
-      </select>
-      <br><br>
-      <button id="getSupportBtn">Get Support</button>
-    </div>
-
-    <!-- Support Message -->
-  <div id="supportMessage" style="margin-top: 20px;"></div>
-
-  <!-- Restart Button -->
-  <div id="restartSection" style="display: none; margin-top: 20px;">
+  <div id="supportMenu" style="display: none;">
+    <h2>Support Options</h2>
+    <button id="toCalmBtn">Quick Calm Toolkit</button>
+    <button id="toWinsBtn">Parenting Wins</button>
+    <button id="toAffirmBtn">Affirmation Spinner</button>
     <button id="restartBtn">Start Over</button>
   </div>
 
-   <!-- Wins Tracker -->
-  <div id="winsSection" style="display: none; margin-top: 30px;">
+  <div id="calmToolkit" style="display: none;">
+    <h2>Quick Calm Toolkit</h2>
+    <button id="breatheBtn">🫁 Breathe With Me</button>
+    <button id="groundBtn">👣 Ground Me</button>
+    <button id="soundBtn">🎵 Play Soothing Sound</button>
+    <div id="calmOutput" style="margin-top: 20px;"></div>
+    <button class="backBtn">⬅ Back to Support Menu</button>
+  </div>
+
+  <div id="winsSection" style="display: none;">
     <h2>Parenting Wins</h2>
     <form id="winsForm">
       <label><input type="checkbox" name="win"> I stayed calm during a hard moment.</label><br>
@@ -52,19 +52,17 @@
       <label><input type="checkbox" name="win"> I spent positive time together today.</label><br>
     </form>
     <div id="winsMessage" style="margin-top: 15px; font-weight: bold;"></div>
+    <button class="backBtn">⬅ Back to Support Menu</button>
   </div>
 
-  <!-- Quick Calm Toolkit -->
-  <div id="calmToolkit" style="margin-top: 40px;">
-    <h2>Quick Calm Toolkit</h2>
-    <button id="breatheBtn">🫁 Breathe With Me</button>
-    <button id="groundBtn">👣 Ground Me</button>
-    <button id="soundBtn">🎵 Play Soothing Sound</button>
-
-    <div id="calmOutput" style="margin-top: 20px; font-size: 18px;"></div>
+  <div id="affirmationSection" style="display: none;">
+    <h2>Affirmation Spinner</h2>
+    <button id="getAffirmationBtn">Give Me an Affirmation</button>
+    <div id="affirmationText" style="margin-top: 15px; font-style: italic;"></div>
+    <button class="backBtn">⬅ Back to Support Menu</button>
   </div>
+</div>
 
-</div> <!-- ✅ Closing the #app div -->
 
 <script src="script.js"></script>
 </body>
