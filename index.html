@@ -29,14 +29,27 @@
     </div>
 
     <!-- Support Message -->
-    <div id="supportMessage" style="margin-top: 20px;"></div>
+  <div id="supportMessage" style="margin-top: 20px;"></div>
 
-    <!-- Restart Button -->
-    <div id="restartSection" style="display: none; margin-top: 20px;">
-      <button id="restartBtn">Start Over</button>
-    </div>
-  </div> <!-- ✅ This was missing -->
+  <!-- Restart Button -->
+  <div id="restartSection" style="display: none; margin-top: 20px;">
+    <button id="restartBtn">Start Over</button>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- Wins Tracker -->
+  <div id="winsSection" style="display: none; margin-top: 30px;">
+    <h2>Parenting Wins</h2>
+    <form id="winsForm">
+      <label><input type="checkbox" name="win"> I stayed calm during a hard moment.</label><br>
+      <label><input type="checkbox" name="win"> I comforted or encouraged my child.</label><br>
+      <label><input type="checkbox" name="win"> I set a boundary without yelling.</label><br>
+      <label><input type="checkbox" name="win"> I spent positive time together today.</label><br>
+    </form>
+    <div id="winsMessage" style="margin-top: 15px; font-weight: bold;"></div>
+  </div>
+
+</div> <!-- ✅ Closing the #app div -->
+
+<script src="script.js"></script>
 </body>
 </html>
