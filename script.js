@@ -81,4 +81,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const affirmation = affirmations[randomIndex];
     document.getElementById("affirmationText").textContent = `"${affirmation}"`;
   });
+    // Quick Calm Toolkit
+  document.getElementById("breatheBtn").addEventListener("click", function () {
+    document.getElementById("calmOutput").innerHTML = `
+      <p>Inhale... <span style="font-size: 24px;">⬆️</span></p>
+      <p>Hold... 2... 3...</p>
+      <p>Exhale... <span style="font-size: 24px;">⬇️</span></p>
+      <p>Repeat slowly, 3–5 times.</p>
+    `;
+  });
+
+  document.getElementById("groundBtn").addEventListener("click", function () {
+    document.getElementById("calmOutput").innerHTML = `
+      <p><strong>5</strong> things you can see<br>
+      <strong>4</strong> things you can touch<br>
+      <strong>3</strong> things you can hear<br>
+      <strong>2</strong> things you can smell<br>
+      <strong>1</strong> thing you can taste</p>
+    `;
+  });
+
+  document.getElementById("soundBtn").addEventListener("click", function () {
+    window.open("https://www.youtube.com/watch?v=1ZYbU82GVz4", "_blank");
+  });
+
 });
