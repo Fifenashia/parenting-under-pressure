@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const affirmationBtn = document.getElementById("goToAffirmations");
 
   const homeScreen = document.getElementById("homeScreen");
-  const checkInSection = document.getElementById("checkInSection");
+  const checkInSection = document.getElementById("checkInScreen");
   const winsSection = document.getElementById("winsSection");
   const calmSection = document.getElementById("calmToolkit");
   const affirmationSection = document.getElementById("affirmationSection");
