@@ -1,17 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM fully loaded and script running ✅");
+  console.log("DOM fully loaded ✅");
 
-  document.getElementById("startBtn").addEventListener("click", function () {
-    document.getElementById("checkInSection").style.display = "block";
-    this.style.display = "none";
+  // Main navigation buttons
+  const checkInBtn = document.getElementById("goToCheckIn");
+  const winsBtn = document.getElementById("goToWins");
+  const calmBtn = document.getElementById("goToCalm");
+  const affirmationBtn = document.getElementById("goToAffirmations");
+
+  const homeScreen = document.getElementById("homeScreen");
+  const checkInSection = document.getElementById("checkInSection");
+  const winsSection = document.getElementById("winsSection");
+  const calmSection = document.getElementById("calmToolkit");
+  const affirmationSection = document.getElementById("affirmationSection");
+
+  function hideAllSections() {
+    checkInSection.style.display = "none";
+    winsSection.style.display = "none";
+    calmSection.style.display = "none";
+    affirmationSection.style.display = "none";
+  }
+
+  function showSection(section) {
+    homeScreen.style.display = "none";
+    hideAllSections();
+    section.style.display = "block";
+  }
+
+  checkInBtn.addEventListener("click", () => showSection(checkInSection));
+  winsBtn.addEventListener("click", () => showSection(winsSection));
+  calmBtn.addEventListener("click", () => showSection(calmSection));
+  affirmationBtn.addEventListener("click", () => showSection(affirmationSection));
+
+  // Start Over button
+  document.getElementById("restartBtn").addEventListener("click", function () {
+    // Clear all inputs and reset
+    document.getElementById("moodSelect").value = "";
+    document.getElementById("supportMessage").textContent = "";
+    document.getElementById("winsMessage").textContent = "";
+    document.getElementById("affirmationText").textContent = "";
+    document.getElementById("calmOutput").textContent = "";
+    document.querySelectorAll('input[name="win"]').forEach(cb => (cb.checked = false));
+
+    // Show home again
+    hideAllSections();
+    homeScreen.style.display = "block";
   });
 
+  // Support message logic
   document.getElementById("getSupportBtn").addEventListener("click", function () {
     const mood = document.getElementById("moodSelect").value;
     const messageDiv = document.getElementById("supportMessage");
-    const restartSection = document.getElementById("restartSection");
-    const winsSection = document.getElementById("winsSection");
-    const winsMessage = document.getElementById("winsMessage");
 
     let message = "";
 
@@ -36,15 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     messageDiv.textContent = message;
-
-    if (mood) {
-      restartSection.style.display = "block";
-      winsSection.style.display = "block";
-    }
-
-    winsMessage.textContent = ""; // Clear previous
   });
 
+  // Wins Tracker
   document.getElementById("winsForm").addEventListener("change", function () {
     const anyChecked = Array.from(document.querySelectorAll('input[name="win"]')).some(
       checkbox => checkbox.checked
@@ -52,18 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("winsMessage").textContent = anyChecked
       ? "✨ You showed up—and that matters."
       : "";
-  });
-
-  document.getElementById("restartBtn").addEventListener("click", function () {
-    document.getElementById("moodSelect").value = "";
-    document.getElementById("supportMessage").textContent = "";
-    document.getElementById("checkInSection").style.display = "none";
-    document.getElementById("restartSection").style.display = "none";
-    document.getElementById("winsSection").style.display = "none";
-    document.getElementById("winsMessage").textContent = "";
-    document.getElementById("startBtn").style.display = "inline-block";
-
-    document.querySelectorAll('input[name="win"]').forEach(cb => (cb.checked = false));
   });
 
   // Affirmation Spinner
@@ -83,7 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const affirmation = affirmations[randomIndex];
     document.getElementById("affirmationText").textContent = `"${affirmation}"`;
   });
-    // Quick Calm Toolkit
+
+  // Calm Toolkit
   document.getElementById("breatheBtn").addEventListener("click", function () {
     document.getElementById("calmOutput").innerHTML = `
       <p>Inhale... <span style="font-size: 24px;">⬆️</span></p>
@@ -106,5 +127,4 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("soundBtn").addEventListener("click", function () {
     window.open("https://www.youtube.com/watch?v=1ZYbU82GVz4", "_blank");
   });
-
 });
