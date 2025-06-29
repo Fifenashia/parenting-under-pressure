@@ -1,37 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded ✅");
 
-  // Navigation buttons
-   const checkInBtn = document.getElementById("goToCheckIn");
+  // Navigation elements
+  const checkInBtn = document.getElementById("goToCheckIn");
   const homeScreen = document.getElementById("homeScreen");
   const checkInScreen = document.getElementById("checkInScreen");
   const supportMenu = document.getElementById("supportMenu");
+  const angrySupport = document.getElementById("angrySupport");
+  const okaySupport = document.getElementById("okaySupport");
   const calmToolkit = document.getElementById("calmToolkit");
   const winsSection = document.getElementById("winsSection");
   const affirmationSection = document.getElementById("affirmationSection");
-  const angrySupport = document.getElementById("angrySupport");
-  const okaySupport = document.getElementById("okaySupport");
 
-    function hideAllSections() {
+  // Hide all sections
+  function hideAllSections() {
     checkInScreen.style.display = "none";
     supportMenu.style.display = "none";
+    angrySupport.style.display = "none";
+    okaySupport.style.display = "none";
     calmToolkit.style.display = "none";
     winsSection.style.display = "none";
     affirmationSection.style.display = "none";
-    angrySupport.style.display = "none";
-    okaySupport.style.display = "none";
   }
 
-  function showSection(section) {
-    hideAllSections();
-    section.style.display = "block";
-  }
-
+  // Navigation to check-in
   checkInBtn.addEventListener("click", function () {
+    hideAllSections();
     homeScreen.style.display = "none";
-    showSection(checkInScreen);
+    checkInScreen.style.display = "block";
   });
 
+  // Get Support logic
   document.getElementById("getSupportBtn").addEventListener("click", function () {
     const mood = document.getElementById("moodSelect").value;
     const messageDiv = document.getElementById("supportMessage");
@@ -60,34 +59,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     messageDiv.textContent = message;
 
-    if (!mood) return;
-
-    hideAllSections();
-
-    // Show special pages for angry or okay
-    if (mood === "angry") {
-      angrySupport.style.display = "block";
-    } else if (mood === "okay") {
-      okaySupport.style.display = "block";
-    } else {
-      supportMenu.style.display = "block";
+    // Show mood-specific support section if mood is selected
+    if (mood) {
+      checkInScreen.style.display = "none";
+      switch (mood) {
+        case "angry":
+          angrySupport.style.display = "block";
+          break;
+        case "okay":
+          okaySupport.style.display = "block";
+          break;
+        default:
+          supportMenu.style.display = "block";
+      }
     }
   });
 
-
-  // Support menu navigation
-  document.getElementById("toCalmBtn").addEventListener("click", () => showSection(calmToolkit));
-  document.getElementById("toWinsBtn").addEventListener("click", () => showSection(winsSection));
-  document.getElementById("toAffirmBtn").addEventListener("click", () => showSection(affirmationSection));
-
-  // Back buttons
-  document.querySelectorAll(".backBtn").forEach(button => {
-    button.addEventListener("click", () => {
-      showSection(supportMenu);
+  // Back buttons for mood-specific pages
+  document.querySelectorAll(".backToSupportBtn").forEach(button => {
+    button.addEventListener("click", function () {
+      hideAllSections();
+      checkInScreen.style.display = "block";
     });
   });
 
-  // Restart button
+  // Support menu navigation
+  document.getElementById("toCalmBtn").addEventListener("click", function () {
+    hideAllSections();
+    calmToolkit.style.display = "block";
+  });
+
+  document.getElementById("toWinsBtn").addEventListener("click", function () {
+    hideAllSections();
+    winsSection.style.display = "block";
+  });
+
+  document.getElementById("toAffirmBtn").addEventListener("click", function () {
+    hideAllSections();
+    affirmationSection.style.display = "block";
+  });
+
+  // Restart button (full reset)
   document.getElementById("restartBtn").addEventListener("click", function () {
     document.getElementById("moodSelect").value = "";
     document.getElementById("supportMessage").textContent = "";
@@ -100,35 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     homeScreen.style.display = "block";
   });
 
-  // Wins tracker logic
-  document.getElementById("winsForm").addEventListener("change", function () {
-    const anyChecked = Array.from(document.querySelectorAll('input[name="win"]')).some(
-      checkbox => checkbox.checked
-    );
-    document.getElementById("winsMessage").textContent = anyChecked
-      ? "✨ You showed up—and that matters."
-      : "";
-  });
-
-  // Affirmation Spinner
-  const affirmations = [
-    "You are not your worst moment.",
-    "Messy is still trying.",
-    "Your effort counts, even when no one sees it.",
-    "You are worthy of kindness—even from yourself.",
-    "This hard moment doesn’t define your whole day.",
-    "You are building safety. That’s sacred.",
-    "You are not failing—you’re learning while tired.",
-    "You are not alone. Others have been here too."
-  ];
-
-  document.getElementById("getAffirmationBtn").addEventListener("click", function () {
-    const randomIndex = Math.floor(Math.random() * affirmations.length);
-    const affirmation = affirmations[randomIndex];
-    document.getElementById("affirmationText").textContent = `"${affirmation}"`;
-  });
-
-  // Calm Toolkit buttons
+  // Calm Toolkit
   document.getElementById("breatheBtn").addEventListener("click", function () {
     document.getElementById("calmOutput").innerHTML = `
       <p>Inhale... <span style="font-size: 24px;">⬆️</span></p>
@@ -150,5 +134,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("soundBtn").addEventListener("click", function () {
     window.open("https://www.youtube.com/watch?v=1ZYbU82GVz4", "_blank");
+  });
+
+  // Affirmation Spinner
+  const affirmations = [
+    "You are not your worst moment.",
+    "Messy is still trying.",
+    "Your effort counts, even when no one sees it.",
+    "You are worthy of kindness—even from yourself.",
+    "This hard moment doesn’t define your whole day.",
+    "You are building safety. That’s sacred.",
+    "You are not failing—you’re learning while tired.",
+    "You are not alone. Others have been here too."
+  ];
+
+  document.getElementById("getAffirmationBtn").addEventListener("click", function () {
+    const randomIndex = Math.floor(Math.random() * affirmations.length);
+    const affirmation = affirmations[randomIndex];
+    document.getElementById("affirmationText").textContent = `"${affirmation}"`;
+  });
+
+  // Wins Tracker
+  document.getElementById("winsForm").addEventListener("change", function () {
+    const anyChecked = Array.from(document.querySelectorAll('input[name="win"]')).some(
+      checkbox => checkbox.checked
+    );
+    document.getElementById("winsMessage").textContent = anyChecked
+      ? "✨ You showed up—and that matters."
+      : "";
   });
 });
