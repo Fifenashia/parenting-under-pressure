@@ -2,20 +2,24 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM fully loaded ✅");
 
   // Navigation buttons
-  const checkInBtn = document.getElementById("goToCheckIn");
+   const checkInBtn = document.getElementById("goToCheckIn");
   const homeScreen = document.getElementById("homeScreen");
   const checkInScreen = document.getElementById("checkInScreen");
   const supportMenu = document.getElementById("supportMenu");
   const calmToolkit = document.getElementById("calmToolkit");
   const winsSection = document.getElementById("winsSection");
   const affirmationSection = document.getElementById("affirmationSection");
+  const angrySupport = document.getElementById("angrySupport");
+  const okaySupport = document.getElementById("okaySupport");
 
-  function hideAllSections() {
+    function hideAllSections() {
     checkInScreen.style.display = "none";
     supportMenu.style.display = "none";
     calmToolkit.style.display = "none";
     winsSection.style.display = "none";
     affirmationSection.style.display = "none";
+    angrySupport.style.display = "none";
+    okaySupport.style.display = "none";
   }
 
   function showSection(section) {
