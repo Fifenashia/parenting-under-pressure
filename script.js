@@ -62,3 +62,22 @@ document.getElementById("restartBtn").addEventListener("click", function () {
 
   document.querySelectorAll('input[name="win"]').forEach(cb => (cb.checked = false));
 });
+
+// Affirmation Spinner
+const affirmations = [
+  "You are not your worst moment.",
+  "Messy is still trying.",
+  "Your effort counts, even when no one sees it.",
+  "You are worthy of kindness—even from yourself.",
+  "This hard moment doesn’t define your whole day.",
+  "You are building safety. That’s sacred.",
+  "You are not failing—you’re learning while tired.",
+  "You are not alone. Others have been here too."
+];
+
+document.getElementById("getAffirmationBtn").addEventListener("click", function () {
+  const randomIndex = Math.floor(Math.random() * affirmations.length);
+  const affirmation = affirmations[randomIndex];
+  document.getElementById("affirmationText").textContent = `"${affirmation}"`;
+});
+
