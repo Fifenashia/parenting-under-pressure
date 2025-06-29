@@ -9,8 +9,29 @@
 <body>
   <div id="app">
     <h1>Parenting Under Pressure</h1>
+    
+    <!-- Start Button -->
     <button id="startBtn">Start Check-In</button>
+
+    <!-- Check-In Section -->
+    <div id="checkInSection" style="display: none; margin-top: 20px;">
+      <p>How are you feeling right now?</p>
+      <select id="moodSelect">
+        <option value="">--Choose One--</option>
+        <option value="overwhelmed">😩 Overwhelmed</option>
+        <option value="angry">😡 Angry</option>
+        <option value="sad">😢 Sad</option>
+        <option value="okay">🙂 Okay</option>
+        <option value="hopeful">🌤️ Hopeful</option>
+      </select>
+      <br><br>
+      <button id="getSupportBtn">Get Support</button>
+    </div>
+
+    <!-- Support Message -->
+    <div id="supportMessage" style="margin-top: 20px;"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
