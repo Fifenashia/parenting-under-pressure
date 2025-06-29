@@ -9,12 +9,12 @@
 <body>
 <div id="app">
   <div id="homeScreen">
-  <h1>Parenting Under Pressure</h1>
-  <button id="goToCheckIn">Start Check-In</button>
-  <button id="goToWins">View Parenting Wins</button>
-  <button id="goToCalm">Quick Calm Toolkit</button>
-  <button id="goToAffirmations">Affirmation Spinner</button>
-</div>
+    <h1>Parenting Under Pressure</h1>
+    <button id="goToCheckIn">Start Check-In</button>
+    <button id="goToWins">View Parenting Wins</button>
+    <button id="goToCalm">Quick Calm Toolkit</button>
+    <button id="goToAffirmations">Affirmation Spinner</button>
+  </div>
 
   <div id="checkInScreen" style="display: none;">
     <h2>How are you feeling right now?</h2>
@@ -27,6 +27,7 @@
       <option value="hopeful">🌤️ Hopeful</option>
     </select>
     <button id="getSupportBtn">Get Support</button>
+    <div id="supportMessage" style="margin-top: 20px;"></div>
   </div>
 
   <div id="supportMenu" style="display: none;">
@@ -50,24 +51,4 @@
     <h2>Parenting Wins</h2>
     <form id="winsForm">
       <label><input type="checkbox" name="win"> I stayed calm during a hard moment.</label><br>
-      <label><input type="checkbox" name="win"> I comforted or encouraged my child.</label><br>
-      <label><input type="checkbox" name="win"> I set a boundary without yelling.</label><br>
-      <label><input type="checkbox" name="win"> I spent positive time together today.</label><br>
-    </form>
-    <div id="winsMessage" style="margin-top: 15px; font-weight: bold;"></div>
-    <button class="backBtn">⬅ Back to Support Menu</button>
-  </div>
-
-  <div id="affirmationSection" style="display: none;">
-    <h2>Affirmation Spinner</h2>
-    <button id="getAffirmationBtn">Give Me an Affirmation</button>
-    <div id="affirmationText" style="margin-top: 15px; font-style: italic;"></div>
-    <button class="backBtn">⬅ Back to Support Menu</button>
-  </div>
-</div>
-
-
-<script src="script.js"></script>
-</body>
-</html>
-
+      <label><input type="checkbox" name="win"> I comforted or
