@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM fully loaded and script running ✅");
+
   document.getElementById("startBtn").addEventListener("click", function () {
     document.getElementById("checkInSection").style.display = "block";
     this.style.display = "none";
