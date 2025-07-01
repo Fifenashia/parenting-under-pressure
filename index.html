@@ -11,6 +11,8 @@
     <!-- Home Screen -->
     <div id="homeScreen">
       <h1>Parenting Under Pressure</h1>
+      <p>Select how you're feeling to receive support:</p>
+      <blockquote style="font-style: italic; color: #666;">“Every emotion is a message. You’re not wrong for feeling it.”</blockquote>
       <button id="goToCheckIn">Start Check-In</button>
     </div>
 
@@ -29,37 +31,50 @@
       <div id="supportMessage" style="margin-top: 20px;"></div>
     </div>
 
-    <!-- Support Menu -->
-    <div id="supportMenu" style="display: none;">
-      <h2>Support Options</h2>
-      <button id="toCalmBtn">Quick Calm Toolkit</button>
-      <button id="toWinsBtn">Parenting Wins</button>
-      <button id="toAffirmBtn">Affirmation Spinner</button>
-      <button id="restartBtn">Start Over</button>
-    </div>
     <!-- Angry Support Section -->
-<div id="angrySupport" style="display: none;">
-  <h2>Anger Support Tools</h2>
-  <p>💡 Try this quick cool-down strategy:</p>
-  <ul>
-    <li>Take 5 deep breaths—slow and steady.</li>
-    <li>Step away from the moment if possible.</li>
-    <li>Write down what you wish you could say, then re-read it with compassion.</li>
-  </ul>
-  <button class="backToSupportBtn">⬅ Back to Emotions</button>
-</div>
+    <div id="angrySupport" style="display: none;">
+      <h2>Anger Support Tools</h2>
+      <p>💡 <strong>Feeling angry doesn’t make you a bad parent.</strong> It means you care, you're stressed, and you need space to breathe.</p>
 
-<!-- Okay Support Section -->
-<div id="okaySupport" style="display: none;">
-  <h2>You're doing okay—and that's meaningful.</h2>
-  <p>🌱 Here's how to build on that:</p>
-  <ul>
-    <li>Celebrate a small win today—even something tiny.</li>
-    <li>Offer encouragement to yourself or someone else.</li>
-    <li>Take 5 minutes just to enjoy a moment—without guilt.</li>
-  </ul>
-  <button class="backToSupportBtn">⬅ Back to Emotions</button>
-</div>
+      <h3>🧘‍♀️ Quick Calm Tools</h3>
+      <ul>
+        <li>🫁 Take 5 slow, deep breaths.</li>
+        <li>🧊 Splash cold water or hold something cool.</li>
+        <li>🚶 Step away to reset—even 30 seconds helps.</li>
+      </ul>
+
+      <h3>🧠 Think It Through</h3>
+      <ul>
+        <li>"What am I trying to protect right now?"</li>
+        <li>"What do I wish they understood about me?"</li>
+        <li>"Can I pause before I respond?"</li>
+      </ul>
+
+      <h3>🤝 Repair Scripts</h3>
+      <ul>
+        <li>"I got too loud. That wasn’t okay—and I’m working on it."</li>
+        <li>"It’s not your fault I was angry. Let’s try again."</li>
+      </ul>
+
+      <h3>✨ Reminder</h3>
+      <blockquote style="font-style: italic; color: #555;">
+        “You are not your reaction. You are your repair.”
+      </blockquote>
+
+      <button class="backToCheckInBtn">⬅ Back to Emotions</button>
+    </div>
+
+    <!-- Okay Support Section -->
+    <div id="okaySupport" style="display: none;">
+      <h2>You’re doing okay—and that’s meaningful.</h2>
+      <p>🌱 Here's how to build on that:</p>
+      <ul>
+        <li>Celebrate a small win today—even something tiny.</li>
+        <li>Offer encouragement to yourself or someone else.</li>
+        <li>Take 5 minutes just to enjoy a moment—without guilt.</li>
+      </ul>
+      <button class="backToCheckInBtn">⬅ Back to Emotions</button>
+    </div>
 
     <!-- Calm Toolkit -->
     <div id="calmToolkit" style="display: none;">
