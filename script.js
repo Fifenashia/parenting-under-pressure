@@ -1,104 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM fully loaded ✅ (debug build)");
+  console.log("DOM fully loaded ✅");
 
-  // -----------------------------
-  // Global debug handlers
-  // -----------------------------
-  window.onerror = (msg, src, line, col, err) => {
-    console.error("❌ JS Error:", msg, "at", src, line + ":" + col, err);
-    alert("A script error occurred. Open DevTools → Console to see details.");
-  };
-  window.addEventListener("unhandledrejection", (ev) => {
-    console.error("❌ Unhandled Promise Rejection:", ev.reason);
-    alert("An async error occurred. Check console for details.");
-  });
-
-  // -----------------------------
-  // Helpers
-  // -----------------------------
+  // ---------- tiny helpers ----------
   const $ = (id) => document.getElementById(id);
   const show = (el) => el && (el.style.display = "block");
   const hide = (el) => el && (el.style.display = "none");
-  const exists = (id) => !!$(id);
 
-  function expect(id) {
-    const el = $(id);
-    if (!el) console.warn(`[expect] Missing element: #${id}`);
-    return el;
-  }
+  // ---------- sections (from index.html) ----------
+  const homeScreen       = $("homeScreen");
+  const checkInScreen    = $("checkInScreen");
+  const angrySupport     = $("angrySupport");
+  const okaySupport      = $("okaySupport");
+  const calmToolkit      = $("calmToolkit");
+  const winsSection      = $("winsSection");
+  const affirmationSection = $("affirmationSection");
+  const resourcesMenu    = $("resourcesMenu");
+  const scenarioScreen   = $("scenarioScreen");
+  const outcomeScreen    = $("outcomeScreen");
 
-  // -----------------------------
-  // Sections
-  // -----------------------------
-  const homeScreen    = expect("homeScreen");
-  const checkInScreen = expect("checkInScreen");
-  const angrySupport  = expect("angrySupport");
-  const okaySupport   = expect("okaySupport");
+  // ---------- nav buttons ----------
+  const goToCheckInBtn   = $("goToCheckIn");
+  const practiceBtn      = $("practiceScenariosBtn");
+  const goToResourcesBtn = $("goToResources");
+  const getSupportBtn    = $("getSupportBtn");
 
-  const scenarioScreen = expect("scenarioScreen"); // NEW
-  const outcomeScreen  = expect("outcomeScreen");  // NEW
+  const openCalmBtn        = $("openCalmToolkit");
+  const openWinsBtn        = $("openWins");
+  const openAffirmBtn      = $("openAffirmations");
 
-  // Buttons
-  const goToCheckInBtn = expect("goToCheckIn");
-  const getSupportBtn  = expect("getSupportBtn");
-  let   practiceBtn    = $("practiceScenariosBtn"); // may add if missing
+  const nextScenarioBtn    = $("nextScenarioBtn");
+  const exitScenariosBtn   = $("exitScenariosBtn");
+  const restartRunBtn      = $("restartRunBtn");
+  const backToCheckInBtn   = $("backToCheckInBtn");
 
-  const nextScenarioBtn  = $("nextScenarioBtn");
-  const exitScenariosBtn = $("exitScenariosBtn");
-  const restartRunBtn    = $("restartRunBtn");
-  const backToCheckInBtn = $("backToCheckInBtn");
-
-  // Scenario DOM refs
+  // scenario DOM
   const scenarioTitle    = $("scenarioTitle");
   const scenarioIntro    = $("scenarioIntro");
   const choicesContainer = $("choicesContainer");
   const scenarioFeedback = $("scenarioFeedback");
   const scenarioEvidence = $("scenarioEvidence");
 
-  // Outcome DOM refs
+  // outcome DOM
   const traitBars      = $("traitBars");
   const outcomeSummary = $("outcomeSummary");
 
-  // -----------------------------
-  // Visibility utils
-  // -----------------------------
+  // ---------- utilities ----------
   function hideAllSections() {
-    [homeScreen, checkInScreen, angrySupport, okaySupport, scenarioScreen, outcomeScreen]
-      .forEach(hide);
+    [homeScreen, checkInScreen, angrySupport, okaySupport,
+     calmToolkit, winsSection, affirmationSection, resourcesMenu,
+     scenarioScreen, outcomeScreen].forEach(hide);
   }
 
-  // -----------------------------
-  // Existing nav
-  // -----------------------------
+  // ---------- HOME NAV ----------
   goToCheckInBtn?.addEventListener("click", () => {
-    console.log("[Nav] Home → Check-In");
     hideAllSections(); show(checkInScreen);
   });
 
+  practiceBtn?.addEventListener("click", () => {
+    hideAllSections(); startParentingRun();
+  });
+
+  goToResourcesBtn?.addEventListener("click", () => {
+    hideAllSections(); show(resourcesMenu);
+  });
+
+  // back to home (from Check-In & Resources)
+  document.querySelectorAll(".backToHomeBtn").forEach(btn => {
+    btn.addEventListener("click", () => { hideAllSections(); show(homeScreen); });
+  });
+
+  // ---------- CHECK-IN NAV ----------
   getSupportBtn?.addEventListener("click", () => {
-    const mood = $("moodSelect")?.value;
-    console.log("[Check-In] Mood =", mood);
+    const mood = $("moodSelect")?.value || "";
     hideAllSections();
-
-    switch (mood) {
-      case "angry": show(angrySupport); break;
-      case "okay":  show(okaySupport);  break;
-      default:
-        show(checkInScreen);
-        alert("Support for that emotion is coming soon!");
-    }
+    if (mood === "angry")      show(angrySupport);
+    else if (mood === "okay")  show(okaySupport);
+    else                       (show(checkInScreen), alert("Support for that emotion is coming soon!"));
   });
 
-  document.querySelectorAll(".backToCheckInBtn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      console.log("[Nav] Back to Check-In");
-      hideAllSections(); show(checkInScreen);
-    });
+  // back from mood-specific to check-in
+  document.querySelectorAll(".backToCheckInBtn").forEach(btn => {
+    btn.addEventListener("click", () => { hideAllSections(); show(checkInScreen); });
   });
 
-  // -----------------------------
-  // Scenarios Engine (with debug)
-  // -----------------------------
+  // ---------- RESOURCES NAV ----------
+  openCalmBtn?.addEventListener("click", () => { hideAllSections(); show(calmToolkit); });
+  openWinsBtn?.addEventListener("click", () => { hideAllSections(); show(winsSection); });
+  openAffirmBtn?.addEventListener("click", () => { hideAllSections(); show(affirmationSection); });
+
+  // back to resources
+  document.querySelectorAll(".backToResourcesBtn").forEach(btn => {
+    btn.addEventListener("click", () => { hideAllSections(); show(resourcesMenu); });
+  });
+
+  // ---------- SCENARIOS ENGINE (with long-term trait meters) ----------
   const RUN_LENGTH = 8;
 
   const meters = {
@@ -118,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return "needs support";
   }
 
+  // use small demo set; later swap to fetch JSON with trait deltas
   const demoScenarios = [
     {
       id: "toddler_tantrum_store",
@@ -125,17 +121,22 @@ document.addEventListener("DOMContentLoaded", () => {
       intro: "Your 2-year-old sees a candy bar and starts yelling at checkout.",
       evidence: "Emotional coaching + consistent limits support self-regulation.",
       choices: [
-        { text: "Name feeling + hold limit + offer alternative.",
+        {
+          text: "Name feeling + hold limit + offer alternative.",
           feedback: "Great: empathy + boundary + choice.",
           points: 2, badge: "Emotion Coach",
           delta: { empathy:2, trust:1, self_regulation:1, attachment:1, independence:0, resilience:0, problem_solving:0 }
         },
-        { text: "Threaten to leave.",
-          feedback: "Holds limit, but misses empathy.", points: 0, badge: null,
+        {
+          text: "Threaten to leave.",
+          feedback: "Holds limit, but misses empathy.",
+          points: 0, badge: null,
           delta: { empathy:0, trust:-1, self_regulation:0, attachment:0, independence:0, resilience:0, problem_solving:0 }
         },
-        { text: "Give them the candy.",
-          feedback: "Stops noise now, reinforces tantrums later.", points: 0, badge: null,
+        {
+          text: "Give them the candy.",
+          feedback: "Stops noise now, reinforces tantrums later.",
+          points: 0, badge: null,
           delta: { empathy:-1, trust:-2, self_regulation:-1, attachment:0, independence:0, resilience:0, problem_solving:0 }
         }
       ]
@@ -146,17 +147,22 @@ document.addEventListener("DOMContentLoaded", () => {
       intro: "It’s 10:15 pm. Your teen asks to stay out an extra hour. Curfew is 11:00.",
       evidence: "Consistency + collaborative problem-solving build trust.",
       choices: [
-        { text: "Hold tonight’s limit; invite talk tomorrow.",
+        {
+          text: "Hold tonight’s limit; invite talk tomorrow.",
           feedback: "Balances empathy with consistency and models negotiation.",
           points: 2, badge: "Boundary Builder",
           delta: { empathy:0, trust:1, self_regulation:0, attachment:0, independence:1, resilience:0, problem_solving:2 }
         },
-        { text: "No. Don’t ask me again.",
-          feedback: "Holds limit but shuts down dialogue.", points: 0, badge: null,
+        {
+          text: "No. Don’t ask me again.",
+          feedback: "Holds limit but shuts down dialogue.",
+          points: 0, badge: null,
           delta: { empathy:0, trust:-1, self_regulation:0, attachment:0, independence:0, resilience:0, problem_solving:0 }
         },
-        { text: "Okay, just this once—midnight is fine.",
-          feedback: "Undermines consistency; invites future pressure.", points: 0, badge: null,
+        {
+          text: "Okay, just this once—midnight is fine.",
+          feedback: "Undermines consistency; invites future pressure.",
+          points: 0, badge: null,
           delta: { empathy:0, trust:-1, self_regulation:0, attachment:0, independence:0, resilience:0, problem_solving:-1 }
         }
       ]
@@ -168,18 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let choiceLocked = false;
 
   function startParentingRun(all = demoScenarios) {
-    console.log("[Run] Starting run with", all.length, "scenarios");
-    if (!scenarioScreen) {
-      alert("Scenario screen (#scenarioScreen) is missing in index.html.");
-      throw new Error("Missing #scenarioScreen");
-    }
-    if (!choicesContainer) {
-      alert("Choices container (#choicesContainer) is missing in index.html.");
-      throw new Error("Missing #choicesContainer");
-    }
-
+    // reset meters
     Object.keys(meters).forEach(k => meters[k] = 0);
 
+    // build/trim pool
     scenarioPool = [...all];
     if (scenarioPool.length > RUN_LENGTH) {
       scenarioPool.sort(() => Math.random() - 0.5);
@@ -196,23 +194,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loadScenario(i) {
     const s = scenarioPool[i];
-    if (!s) {
-      console.warn("[Run] No scenario at index", i);
-      showOutcome();
-      return;
-    }
-    console.log("[Scenario] Loading:", s.id);
+    if (!s) { showOutcome(); return; }
 
-    if (scenarioTitle)   scenarioTitle.textContent = s.title || "";
-    if (scenarioIntro)   scenarioIntro.textContent = s.intro || "";
-    if (choicesContainer) choicesContainer.innerHTML = "";
-    if (scenarioFeedback) scenarioFeedback.textContent = "";
-    if (scenarioEvidence) scenarioEvidence.textContent = "";
-    if (nextScenarioBtn)  nextScenarioBtn.disabled  = true;
-
+    scenarioTitle.textContent = s.title || "";
+    scenarioIntro.textContent = s.intro || "";
+    choicesContainer.innerHTML = "";
+    scenarioFeedback.textContent = "";
+    scenarioEvidence.textContent = "";
+    nextScenarioBtn.disabled = true;
     choiceLocked = false;
 
-    s.choices.forEach((c, idx) => {
+    s.choices.forEach((c) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "choice-btn";
@@ -220,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", () => {
         if (choiceLocked) return;
         choiceLocked = true;
-        console.log("[Choice] Selected option", idx + 1, c);
         applyChoice(c, s);
       });
       choicesContainer.appendChild(btn);
@@ -228,44 +219,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyChoice(choice, scenario) {
-    if (scenarioFeedback) scenarioFeedback.textContent = choice.feedback || "";
-    if (scenarioEvidence) scenarioEvidence.textContent = scenario.evidence || "";
+    scenarioFeedback.textContent = choice.feedback || "";
+    scenarioEvidence.textContent = scenario.evidence || "";
 
     if (choice.delta) {
       Object.entries(choice.delta).forEach(([k, v]) => {
         meters[k] = (meters[k] || 0) + (v || 0);
       });
-      console.log("[Meters]", JSON.stringify(meters));
     }
 
-    if (nextScenarioBtn) nextScenarioBtn.disabled = false;
+    nextScenarioBtn.disabled = false;
   }
 
   nextScenarioBtn?.addEventListener("click", () => {
-    console.log("[Nav] Next scenario");
     scenarioIndex++;
-    if (scenarioIndex >= scenarioPool.length) {
-      showOutcome();
-    } else {
-      loadScenario(scenarioIndex);
-    }
+    if (scenarioIndex >= scenarioPool.length) showOutcome();
+    else loadScenario(scenarioIndex);
   });
 
   exitScenariosBtn?.addEventListener("click", () => {
-    console.log("[Nav] Exit scenarios → Check-In");
-    hideAllSections(); show(checkInScreen);
+    hideAllSections(); show(homeScreen);
   });
 
   function showOutcome() {
-    console.log("[Outcome] Showing outcome");
     hide(scenarioScreen);
     drawOutcomeBars();
-    if (outcomeSummary) outcomeSummary.innerHTML = buildOutcomeSummary();
+    outcomeSummary.innerHTML = buildOutcomeSummary();
     show(outcomeScreen);
   }
 
   function drawOutcomeBars() {
-    if (!traitBars) return console.warn("[Outcome] Missing #traitBars");
     traitBars.innerHTML = "";
     const maxAbs = 10;
 
@@ -313,59 +296,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function human(k){ return k.replace("_"," ").replace(/\b\w/g,m=>m.toUpperCase()); }
 
-  restartRunBtn?.addEventListener("click", () => {
-    console.log("[Run] Restart");
-    startParentingRun(demoScenarios);
-  });
+  restartRunBtn?.addEventListener("click", () => startParentingRun());
+  backToCheckInBtn?.addEventListener("click", () => { hideAllSections(); show(checkInScreen); });
 
-  backToCheckInBtn?.addEventListener("click", () => {
-    console.log("[Nav] Outcome → Check-In");
-    hideAllSections(); show(checkInScreen);
-  });
-
-  // -----------------------------
-  // PRACTICE BUTTON: rock-solid wiring
-  // -----------------------------
-  function wirePracticeButton() {
-    practiceBtn = $("practiceScenariosBtn");
-    if (!practiceBtn) {
-      console.warn("[Practice] #practiceScenariosBtn not found. Creating a temporary one inside #checkInScreen.");
-      if (checkInScreen) {
-        const temp = document.createElement("button");
-        temp.id = "practiceScenariosBtn";
-        temp.textContent = "Practice Scenarios (debug)";
-        temp.style.marginLeft = "8px";
-        checkInScreen.appendChild(temp);
-        practiceBtn = temp;
-      }
-    }
-    if (practiceBtn) {
-      practiceBtn.addEventListener("click", () => {
-        console.log("[Practice] Clicked");
-        startParentingRun(demoScenarios);
-      });
-      console.log("[Practice] Button wired ✅");
-    }
-  }
-  wirePracticeButton();
-
-  // Keyboard shortcut: press "S" to start scenarios
+  // Optional keyboard shortcut: press "S" on Home to start scenarios
   document.addEventListener("keydown", (e) => {
-    if (e.key.toLowerCase() === "s") {
-      console.log("[Practice] Keyboard shortcut S");
-      startParentingRun(demoScenarios);
+    if (e.key.toLowerCase() === "s" && homeScreen && homeScreen.style.display !== "none") {
+      startParentingRun();
     }
-  });
-
-  // Final presence report
-  console.table({
-    homeScreen: !!homeScreen,
-    checkInScreen: !!checkInScreen,
-    angrySupport: !!angrySupport,
-    okaySupport: !!okaySupport,
-    scenarioScreen: !!scenarioScreen,
-    outcomeScreen: !!outcomeScreen,
-    practiceBtn: !!practiceBtn,
-    nextScenarioBtn: !!nextScenarioBtn,
   });
 });
