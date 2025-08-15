@@ -119,3 +119,13 @@ select {
   width: 100%;
   margin: 8px 0;
 }
+#scenariosIntroScreen, #childSetupScreen {
+  margin-top: 16px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+.secondary { background:#e5e7eb; color:#111827; }
+.secondary:hover { background:#d1d5db; }
+
