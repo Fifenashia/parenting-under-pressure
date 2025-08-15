@@ -6,6 +6,20 @@ body {
   text-align: center;
   padding: 2em;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Main heading */
@@ -26,6 +40,12 @@ button {
   margin: 10px;
 }
 
+button:hover {
+  background-color: #7c3aed;
+  transform: scale(1.02);
+  transition: all 0.2s ease-in-out;
+}
+
 /* Dropdown menu */
 select {
   padding: 10px;
@@ -40,21 +60,7 @@ select {
   margin-top: 15px;
   font-weight: 500;
 }
-#app {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  min-height: 100vh;
-}
+
 #winsSection {
   background-color: #fef3c7;
   padding: 20px;
@@ -63,6 +69,7 @@ body {
   max-width: 500px;
   margin: 20px auto;
 }
+
 /* --- Home Screen Enhancements --- */
 #homeScreen {
   padding: 30px 20px;
@@ -82,9 +89,6 @@ body {
   font-size: 18px;
   margin-bottom: 10px;
   color: #555;
-  border: 1px dashed red;
-}
-
 }
 
 #homeScreen blockquote {
@@ -97,10 +101,73 @@ body {
   border-radius: 6px;
 }
 
-/* Make buttons slightly more animated on hover */
-button:hover {
-  background-color: #7c3aed;
-  transform: scale(1.02);
-  transition: all 0.2s ease-in-out;
+/* ===== Scenario Practice Styles ===== */
+#scenarioScreen, #outcomeScreen {
+  text-align: left;
 }
 
+#scenarioTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#scenarioIntro {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.choice-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #f3f4f6;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.choice-btn:hover {
+  background: #e0e7ff;
+}
+
+.choice-btn.correct {
+  border-color: #10b981;
+  background: #d1fae5;
+}
+
+.choice-btn.incorrect {
+  border-color: #ef4444;
+  background: #fee2e2;
+}
+
+/* Trait bars */
+.trait-bar {
+  margin-bottom: 0.5rem;
+}
+
+.trait-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.trait-fill {
+  height: 14px;
+  background: #8b5cf6;
+  border-radius: 6px;
+}
+
+/* Feedback */
+#scenarioFeedback {
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
+
+#scenarioEvidence {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
