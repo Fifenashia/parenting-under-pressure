@@ -14,7 +14,13 @@
       <h1>Parenting Under Pressure</h1>
       <p>This app is here to help you slow down, check in, and respond instead of react. Whether you're having a rough day or just want to build on a good one, you'll find tools, encouragement, and reminders that you're doing your best—and that matters.</p>
       <blockquote style="font-style: italic; color: #666;">“Every emotion is a message. You’re not wrong for feeling it.”</blockquote>
-      <button id="goToCheckIn">Start Check-In</button>
+
+      <!-- Three primary actions -->
+      <div>
+        <button id="goToCheckIn">Parent Check-In</button>
+        <button id="practiceScenariosBtn">Practice Scenarios</button>
+        <button id="goToResources">Resources</button>
+      </div>
     </div>
 
     <!-- Check-In Screen -->
@@ -29,9 +35,10 @@
         <option value="hopeful">🌤️ Hopeful</option>
       </select>
       <button id="getSupportBtn">Get Support</button>
-      <!-- NEW: entry point into scenarios -->
-      <button id="practiceScenariosBtn" style="margin-left: 8px;">Practice Scenarios</button>
       <div id="supportMessage" style="margin-top: 20px;"></div>
+      <div style="margin-top:10px;">
+        <button class="backToHomeBtn">⬅ Back to Home</button>
+      </div>
     </div>
 
     <!-- Angry Support Section -->
@@ -86,7 +93,9 @@
       <button id="groundBtn">👣 Ground Me</button>
       <button id="soundBtn">🎵 Play Soothing Sound</button>
       <div id="calmOutput" style="margin-top: 20px;"></div>
-      <button class="backBtn">⬅ Back to Support Menu</button>
+      <div style="margin-top:10px;">
+        <button class="backToResourcesBtn">⬅ Back to Resources</button>
+      </div>
     </div>
 
     <!-- Parenting Wins -->
@@ -99,7 +108,9 @@
         <label><input type="checkbox" name="win"> I spent positive time together today.</label><br>
       </form>
       <div id="winsMessage" style="margin-top: 15px; font-weight: bold;"></div>
-      <button class="backBtn">⬅ Back to Support Menu</button>
+      <div style="margin-top:10px;">
+        <button class="backToResourcesBtn">⬅ Back to Resources</button>
+      </div>
     </div>
 
     <!-- Affirmation Spinner -->
@@ -107,11 +118,29 @@
       <h2>Affirmation Spinner</h2>
       <button id="getAffirmationBtn">Give Me an Affirmation</button>
       <div id="affirmationText" style="margin-top: 15px; font-style: italic;"></div>
-      <button class="backBtn">⬅ Back to Support Menu</button>
+      <div style="margin-top:10px;">
+        <button class="backToResourcesBtn">⬅ Back to Resources</button>
+      </div>
     </div>
 
     <!-- ============================== -->
-    <!-- NEW: Scenario Practice Screen -->
+    <!-- NEW: Resources Menu -->
+    <!-- ============================== -->
+    <section id="resourcesMenu" style="display:none;">
+      <h2>Resources</h2>
+      <p>Pick a tool to support you right now.</p>
+      <div>
+        <button id="openCalmToolkit">Open Calm Toolkit</button>
+        <button id="openWins">Log Parenting Wins</button>
+        <button id="openAffirmations">Affirmations</button>
+      </div>
+      <div style="margin-top:10px;">
+        <button class="backToHomeBtn">⬅ Back to Home</button>
+      </div>
+    </section>
+
+    <!-- ============================== -->
+    <!-- Scenario Practice Screen -->
     <!-- ============================== -->
     <section id="scenarioScreen" style="display:none;">
       <h2 id="scenarioTitle"></h2>
@@ -129,7 +158,7 @@
     </section>
 
     <!-- ============================== -->
-    <!-- NEW: Outcome Screen -->
+    <!-- Outcome Screen -->
     <!-- ============================== -->
     <section id="outcomeScreen" style="display:none;">
       <h2>Your child profile</h2>
