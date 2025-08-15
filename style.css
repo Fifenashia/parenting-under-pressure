@@ -1,4 +1,4 @@
-/* ===== Base / Layout ===== */
+/* Reset base styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f3f4f6;
@@ -13,55 +13,69 @@ body {
   min-height: 100vh;
 }
 
+/* Main container */
 #app {
-  max-width: 640px;
-  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
-  background-color: #fff;
-  padding: 28px;
+  background-color: white;
+  padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.1);
-  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Headings ===== */
-h1 { font-size: 28px; margin: 0 0 16px 0; }
-h2 { margin: 0 0 10px 0; }
+/* Main heading */
+h1 {
+  font-size: 36px;
+  margin-bottom: 5px;
+  color: #4c1d95;
+  font-weight: bold;
+}
 
-/* ===== Buttons ===== */
-button {
-  padding: 12px 16px;
+/* Subtitle / tagline */
+h1 + p em {
+  display: block;
+  font-size: 18px;
+  color: #6b21a8;
+  margin-bottom: 20px;
+}
+
+/* Paragraphs */
+p {
   font-size: 16px;
-  background-color: #8b5cf6; /* brand purple */
-  color: #fff;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+/* Blockquote styling */
+blockquote {
+  font-style: italic;
+  color: #6b7280;
+  margin: 20px 0;
+  padding: 10px;
+  border-left: 4px solid #a78bfa;
+  background-color: #f5f3ff;
+  border-radius: 6px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #8b5cf6;
+  color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 6px 0;
-  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  margin: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
   background-color: #7c3aed;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transform: scale(1.02);
 }
 
-button:focus-visible,
-select:focus-visible {
-  outline: 3px solid #a78bfa;
-  outline-offset: 2px;
-  border-radius: 10px;
-}
-
-/* Secondary / subtle buttons */
-button.secondary {
-  background-color: #e5e7eb;
-  color: #111827;
-}
-button.secondary:hover { background-color: #d1d5db; }
-
-/* ===== Form Elements ===== */
+/* Dropdown menu */
 select {
   padding: 10px;
   font-size: 16px;
@@ -69,155 +83,39 @@ select {
   border: 1px solid #ccc;
 }
 
-/* ===== Support message ===== */
+/* Support message */
 #supportMessage {
   font-size: 18px;
   margin-top: 15px;
   font-weight: 500;
 }
 
-/* ===== Home Screen ===== */
-#homeScreen {
-  padding: 24px 20px;
-  background: linear-gradient(to bottom right, #e0e7ff, #ede9fe);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
-}
-
-#homeScreen h1 {
-  font-size: 32px;
-  color: #4c1d95;
-  margin-bottom: 8px;
-}
-
-#homeScreen p {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-#homeScreen blockquote {
-  font-style: italic;
-  color: #6b7280;
-  margin: 16px 0 22px 0;
-  padding: 10px;
-  border-left: 4px solid #a78bfa;
-  background-color: #f5f3ff;
-  border-radius: 6px;
-}
-
-/* Home actions grid (3 buttons) */
-.home-actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 8px;
-}
-.home-actions button { width: 100%; }
-
-@media (min-width: 520px) {
-  .home-actions { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ===== Resources Menu ===== */
-#resourcesMenu {
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.06);
-}
-#resourcesMenu > div > button { width: 100%; }
-@media (min-width: 520px) {
-  #resourcesMenu > div {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-}
-
-/* ===== Wins Section ===== */
+/* Wins section */
 #winsSection {
   background-color: #fef3c7;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin: 20px 0;
+  max-width: 500px;
+  margin: 20px auto;
 }
 
-/* ===== Scenario Practice ===== */
-#scenarioScreen,
-#outcomeScreen {
-  margin-top: 16px;
-  background-color: #fff;
-  padding: 20px;
+/* Home screen background */
+#homeScreen {
+  padding: 30px 20px;
+  background: linear-gradient(to bottom right, #e0e7ff, #ede9fe);
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+  margin-top: 20px;
 }
 
-#scenarioTitle {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #4c1d95;
-  margin-bottom: 6px;
+/* Home screen action buttons */
+.home-actions {
+  margin-top: 20px;
 }
 
-#scenarioIntro {
-  margin-bottom: 12px;
-  color: #374151;
-}
-
-#choicesContainer button {
+.home-actions button {
+  display: block;
   width: 100%;
-  text-align: left;
-  background: #f9fafb;
-  color: #111827;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 12px 14px;
   margin: 8px 0;
-}
-
-#choicesContainer button:hover {
-  background: #f3f4f6;
-}
-
-#nextScenarioBtn:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-}
-
-#exitScenariosBtn,
-#backToCheckInBtn { background-color: #e5e7eb; color: #111827; }
-#exitScenariosBtn:hover,
-#backToCheckInBtn:hover { background-color: #d1d5db; }
-
-/* Feedback + Evidence */
-#scenarioFeedback { margin-top: .75rem; font-weight: 600; color: #111827; }
-#scenarioEvidence { margin-top: .25rem; font-size: .9rem; color: #6b7280; }
-
-/* ===== Outcome meters ===== */
-.trait { margin: 10px 0; }
-.trait .label { margin-bottom: 6px; color: #111827; font-weight: 600; }
-.trait .bar {
-  height: 10px;
-  background: #eef2ff;          /* pale indigo track */
-  border-radius: 9999px;
-  position: relative;
-  overflow: hidden;
-}
-.trait .fill {
-  height: 10px;
-  background: #8b5cf6;          /* brand purple */
-  position: absolute;
-  left: 0; top: 0;
-  border-radius: 9999px;
-  transition: width .35s ease;
-}
-
-/* ===== Utility ===== */
-.nav-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
-.muted { opacity: .8; font-size: .9rem; }
-
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
 }
