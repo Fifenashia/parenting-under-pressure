@@ -36,6 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartRunBtn      = $("restartRunBtn");
   const backToCheckInBtn   = $("backToCheckInBtn");
 
+  // Affirmations UI
+  const getAffirmationBtn = $("getAffirmationBtn");
+  const affirmationText   = $("affirmationText");
+
   // scenario DOM
   const scenarioTitle    = $("scenarioTitle");
   const scenarioIntro    = $("scenarioIntro");
@@ -320,6 +324,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   restartRunBtn?.addEventListener("click", () => startParentingRun());
   backToCheckInBtn?.addEventListener("click", () => { hideAllSections(); show(checkInScreen); });
+
+  /*************** Affirmation Spinner ***************/
+const AFFIRMATIONS = [
+  "I can be both strong and gentle.",
+  "My patience grows with each breath I take.",
+  "Today, progress matters more than perfection.",
+  "I am building trust with my child one moment at a time.",
+  "I can choose connection over control.",
+  "My love is a steady anchor for my child.",
+  "It’s okay to rest when I am tired.",
+  "I am the calm my child can return to.",
+  "Even small repairs can heal big hurts.",
+  "I am learning and growing alongside my child.",
+  "I can listen with my whole heart.",
+  "Every day is a new opportunity to connect.",
+  "I forgive myself for past mistakes.",
+  "I bring safety and kindness to my home.",
+  "I am exactly the parent my child needs."
+];
+
+let lastAffirmationIndex = -1;
+
+function randomAffirmation() {
+  if (AFFIRMATIONS.length === 0) return "";
+  let i = Math.floor(Math.random() * AFFIRMATIONS.length);
+  if (i === lastAffirmationIndex && AFFIRMATIONS.length > 1) {
+    // avoid immediate repeats
+    i = (i + 1) % AFFIRMATIONS.length;
+  }
+  lastAffirmationIndex = i;
+  return AFFIRMATIONS[i];
+}
+
+function showNewAffirmation() {
+  if (!affirmationText) return;
+  affirmationText.textContent = `“${randomAffirmation()}”`;
+}
+
+getAffirmationBtn?.addEventListener("click", showNewAffirmation);
+
+// When user opens the Affirmations screen from Resources, show one automatically
+openAffirmBtn?.addEventListener("click", () => {
+  show(affirmationSection);
+  showNewAffirmation();
+});
+
+// Optional: keyboard shortcut “A” to spin again when viewing the Affirmations screen
+document.addEventListener("keydown", (e) => {
+  if (affirmationSection && affirmationSection.style.display !== "none" && e.key.toLowerCase() === "a") {
+    showNewAffirmation();
+  }
+});
+/***************************************************/
+
 
   // Optional keyboard shortcut: press "S" on Home to start scenarios
   document.addEventListener("keydown", (e) => {
