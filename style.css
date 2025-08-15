@@ -1,4 +1,4 @@
-/* Reset base styles */
+/* ===== Base / Layout ===== */
 body {
   font-family: Arial, sans-serif;
   background-color: #f3f4f6;
@@ -14,39 +14,54 @@ body {
 }
 
 #app {
-  max-width: 500px;
+  max-width: 640px;
+  width: 100%;
   margin: 0 auto;
-  background-color: white;
-  padding: 30px;
+  background-color: #fff;
+  padding: 28px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  text-align: left;
 }
 
-/* Main heading */
-h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
+/* ===== Headings ===== */
+h1 { font-size: 28px; margin: 0 0 16px 0; }
+h2 { margin: 0 0 10px 0; }
 
-/* Buttons */
+/* ===== Buttons ===== */
 button {
-  padding: 10px 20px;
+  padding: 12px 16px;
   font-size: 16px;
-  background-color: #8b5cf6;
-  color: white;
+  background-color: #8b5cf6; /* brand purple */
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  margin: 10px;
+  margin: 6px 0;
+  transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
 }
 
 button:hover {
   background-color: #7c3aed;
-  transform: scale(1.02);
-  transition: all 0.2s ease-in-out;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
 }
 
-/* Dropdown menu */
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid #a78bfa;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* Secondary / subtle buttons */
+button.secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+button.secondary:hover { background-color: #d1d5db; }
+
+/* ===== Form Elements ===== */
 select {
   padding: 10px;
   font-size: 16px;
@@ -54,35 +69,25 @@ select {
   border: 1px solid #ccc;
 }
 
-/* Support message */
+/* ===== Support message ===== */
 #supportMessage {
   font-size: 18px;
   margin-top: 15px;
   font-weight: 500;
 }
 
-#winsSection {
-  background-color: #fef3c7;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  max-width: 500px;
-  margin: 20px auto;
-}
-
-/* --- Home Screen Enhancements --- */
+/* ===== Home Screen ===== */
 #homeScreen {
-  padding: 30px 20px;
+  padding: 24px 20px;
   background: linear-gradient(to bottom right, #e0e7ff, #ede9fe);
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
-  margin-top: 40px;
 }
 
 #homeScreen h1 {
   font-size: 32px;
   color: #4c1d95;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 #homeScreen p {
@@ -94,80 +99,125 @@ select {
 #homeScreen blockquote {
   font-style: italic;
   color: #6b7280;
-  margin: 20px 0;
+  margin: 16px 0 22px 0;
   padding: 10px;
   border-left: 4px solid #a78bfa;
   background-color: #f5f3ff;
   border-radius: 6px;
 }
 
-/* ===== Scenario Practice Styles ===== */
-#scenarioScreen, #outcomeScreen {
-  text-align: left;
+/* Home actions grid (3 buttons) */
+.home-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+.home-actions button { width: 100%; }
+
+@media (min-width: 520px) {
+  .home-actions { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===== Resources Menu ===== */
+#resourcesMenu {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+#resourcesMenu > div > button { width: 100%; }
+@media (min-width: 520px) {
+  #resourcesMenu > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+/* ===== Wins Section ===== */
+#winsSection {
+  background-color: #fef3c7;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 20px 0;
+}
+
+/* ===== Scenario Practice ===== */
+#scenarioScreen,
+#outcomeScreen {
+  margin-top: 16px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
 #scenarioTitle {
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  color: #4c1d95;
+  margin-bottom: 6px;
 }
 
 #scenarioIntro {
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
+  color: #374151;
 }
 
-.choice-btn {
-  display: block;
+#choicesContainer button {
   width: 100%;
   text-align: left;
+  background: #f9fafb;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+
+#choicesContainer button:hover {
   background: #f3f4f6;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
 }
 
-.choice-btn:hover {
-  background: #e0e7ff;
+#nextScenarioBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
-.choice-btn.correct {
-  border-color: #10b981;
-  background: #d1fae5;
+#exitScenariosBtn,
+#backToCheckInBtn { background-color: #e5e7eb; color: #111827; }
+#exitScenariosBtn:hover,
+#backToCheckInBtn:hover { background-color: #d1d5db; }
+
+/* Feedback + Evidence */
+#scenarioFeedback { margin-top: .75rem; font-weight: 600; color: #111827; }
+#scenarioEvidence { margin-top: .25rem; font-size: .9rem; color: #6b7280; }
+
+/* ===== Outcome meters ===== */
+.trait { margin: 10px 0; }
+.trait .label { margin-bottom: 6px; color: #111827; font-weight: 600; }
+.trait .bar {
+  height: 10px;
+  background: #eef2ff;          /* pale indigo track */
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+}
+.trait .fill {
+  height: 10px;
+  background: #8b5cf6;          /* brand purple */
+  position: absolute;
+  left: 0; top: 0;
+  border-radius: 9999px;
+  transition: width .35s ease;
 }
 
-.choice-btn.incorrect {
-  border-color: #ef4444;
-  background: #fee2e2;
-}
+/* ===== Utility ===== */
+.nav-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+.muted { opacity: .8; font-size: .9rem; }
 
-/* Trait bars */
-.trait-bar {
-  margin-bottom: 0.5rem;
-}
-
-.trait-label {
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-}
-
-.trait-fill {
-  height: 14px;
-  background: #8b5cf6;
-  border-radius: 6px;
-}
-
-/* Feedback */
-#scenarioFeedback {
-  margin-top: 0.75rem;
-  font-weight: bold;
-}
-
-#scenarioEvidence {
-  margin-top: 0.25rem;
-  font-size: 0.9rem;
-  opacity: 0.8;
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }
