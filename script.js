@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const homeScreen       = $("homeScreen");
   const checkInScreen    = $("checkInScreen");
   const angrySupport     = $("angrySupport");
+  const overwhelmedSupport = $("overwhelmedSupport");
+  const sadSupport       = $("sadSupport");
+  const hopefulSupport   = $("hopefulSupport");
   const okaySupport      = $("okaySupport");
   const calmToolkit      = $("calmToolkit");
   const winsSection      = $("winsSection");
@@ -70,13 +73,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ---------- CHECK-IN NAV ----------
-  getSupportBtn?.addEventListener("click", () => {
-    const mood = $("moodSelect")?.value || "";
-    hideAllSections();
-    if (mood === "angry")      show(angrySupport);
-    else if (mood === "okay")  show(okaySupport);
-    else                       (show(checkInScreen), alert("Support for that emotion is coming soon!"));
-  });
+ getSupportBtn?.addEventListener("click", () => {
+  const mood = document.getElementById("moodSelect")?.value || "";
+  hideAllSections();
+
+  switch (mood) {
+    case "angry":
+      show(angrySupport);
+      break;
+    case "overwhelmed":
+      show(overwhelmedSupport);
+      break;
+    case "sad":
+      show(sadSupport);
+      break;
+    case "okay":
+      show(okaySupport);
+      break;
+    case "hopeful":
+      show(hopefulSupport);
+      break;
+    default:
+      show(checkInScreen);
+      alert("Support for that emotion is coming soon!");
+  }
+});
+
 
   // back from mood-specific to check-in
   document.querySelectorAll(".backToCheckInBtn").forEach(btn => {
